@@ -16,8 +16,10 @@ stages:
 
         steps:
           - script: |
-              sudo apt-get update
-              sudo apt-get install -y ansible sshpass
+              echo "Starting update..."
+              sudo apt update
+              echo "Starting installs..."
+              sudo apt install -y ansible sshpass
             displayName: "Install Ansible & SSH dependencies"
 
           - task: DownloadSecureFile@1
