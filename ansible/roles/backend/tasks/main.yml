@@ -66,6 +66,6 @@
 
 - name: Create database if not exists using mysql command
   ansible.builtin.shell: >
-    mysql -h "{{ db_host }}" -u "{{ db_user }}" -e "CREATE DATABASE IF NOT EXISTS \`{{ db_name }}\`;"
+    mysql -h "{{ db_host }}" -u "{{ db_user }}" -e "CREATE DATABASE IF NOT EXISTS \`{{ db_name }}\`;" --ssl-mode=REQUIRED
   environment:
     MYSQL_PWD: "{{ db_password }}"
