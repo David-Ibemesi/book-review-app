@@ -55,10 +55,17 @@
     state: present
   become: yes
 
+#- name: Create database if not exists using mysql command
+#  shell: |
+#    export MYSQL_PWD="{{ db_password }}"
+#    mysql -h "{{ db_host }}" -u "{{ db_user }}" -e "CREATE DATABASE IF NOT EXISTS \`{{ db_name }}\`;"
+#  args:
+#    executable: /bin/bash
+#  environment:
+#    MYSQL_PWD: "{{ db_password }}"
+
 - name: Create database if not exists using mysql command
-  shell: |
-    mysql -h {{ db_host }} -u {{ db_user }} -p {{ db_password }} -e "CREATE DATABASE IF NOT EXISTS {{ db_name }};"
-  args:
-    executable: /bin/bash
+  ansible.builtin.shell: >
+    mysql -h "{{ db_host }}" -u "{{ db_user }}" -e "CREATE DATABASE IF NOT EXISTS \`{{ db_name }}\`;"
   environment:
     MYSQL_PWD: "{{ db_password }}"
